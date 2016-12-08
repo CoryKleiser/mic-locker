@@ -4,17 +4,23 @@ var card = new Vue({
     el: "#card",
     data: {
         header: "Microphones",
+        totalMics: 0,
+        totalModels: 0,
         items: [
             {
                 text: "akg414",
-                manufacturer: "AKG"
+                manufacturer: "AKG",
+                quantity: 1
             },
             {
                 text: "U87",
-                manufacturer: "Neumann"},
+                manufacturer: "Neumann",
+                quantity: 2
+            },
             {
                 text: "sm58",
-                manufacturer: "sennheiser"
+                manufacturer: "sennheiser",
+                quantity: 6
             }
         ]
     },
@@ -22,17 +28,47 @@ var card = new Vue({
         addItem: function(){
             let itemInput = document.getElementById("addItem");
             let manufacturerInput = document.getElementById("itemMake");
+            let itemQuantity = document.getElementById("itemQuantity");
 
             if (itemInput.value !== ""){
                 this.items.push({
                     text: itemInput.value,
-                    manufacturer: manufacturerInput.value
+                    manufacturer: manufacturerInput.value,
+                    quantity: parseInt(itemQuantity.value)
                 });
                 itemInput.value = "";
+                manufacturerInput.value = "";
+                itemQuantity.value = "";
             }
         },
         deleteItem: function(index){
             this.items.splice(index, 1);
+        },
+        subtractMic: function (index) {
+            if (this.items[index].quantity > 0) {
+                this.items[index].quantity -= 1;
+            }
+        },
+        addMic: function (index) {
+            this.items[index].quantity += 1;
+        }
+    },
+    computed: {
+        totalMics: function () {
+            var sum = 0;
+            var items = this.items;
+
+            for(var i in items){
+                sum += items[i].quantity;
+            }
+            return sum;
+        },
+        totalModels: function () {
+            var sum;
+            var items = this.items;
+
+            sum = items.length;
+            return sum;
         }
     },
     filters: {

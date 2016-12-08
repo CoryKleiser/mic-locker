@@ -2,26 +2,81 @@
 <html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Mic Locker</title>
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+    <!-- Optional theme -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
     <div id="card">
-        <header>{{ header }}</header>
-        <div>
-            <input id="addItem" v-on:keypress.enter/>
-            <input id="itemMake" v-on:keypress.enter/>
-            <button v-on:click="addItem">Add Mic</button>
+        <div class="container-fluid">
+            <form class="form-inline" v-on:submit.prevent="addItem">
+                <!--TODO: add input labels-->
+                <div class="form-group">
+                    <label for="addItem" class="sr-only">Microphone Model</label>
+                    <input id="addItem" placeholder="Mic Model" required
+                        class="form-control"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="itemMake" class="sr-only">Microphone Manufacturer</label>
+                    <input id="itemMake" placeholder="Manufacturer"
+                           class="form-control"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="itemQuantity" class="sr-only">Quantity</label>
+                    <input id="itemQuantity" type="number" min="1" placeholder="Quantity" required
+                           class="form-control"/>
+                </div>
+                <input id="addMicrophone" type="submit" value="Add Mic"
+                    class="btn btn-default pull-right"/>
+            </form>
         </div>
-        <ul>
-            <li v-for="(item , index) in items">
-                <h4>{{ item.text | uppercase }}
-                    <button v-on:click="deleteItem(index)">Delete</button></h4>
-                <span>The {{item.text | undercase}} is made by {{item.manufacturer | capitalize}}</span>
-                <br>
-                <a href="">{{ item.text | undercase | url}}</a>
-            </li>
-        </ul>
+
+        <template v-if="items.length > 0">
+                <header>{{ header }}</header>
+            <ul class="list-unstyled">
+                <div class="container">
+                    <li v-for="(item , index) in items"
+                        class="panel panel-info">
+                        <h4 class="panel-heading">{{ item.text | uppercase }}</h4>
+                        <div class="panel-body">
+                            <h4 class="pull-right">
+                                <input type="button" value="-" v-on:click="subtractMic(index)"
+                                    v-show="item.quantity > 0"
+                                    class="btn btn-warning btn-xs"/>
+                                <span class="badge">{{ item.quantity }}</span>
+
+                                <input type="button" value="+" v-on:click="addMic(index)"
+                                    class="btn btn-warning btn-xs"/>
+                            </h4>
+                            <span>The {{item.text | undercase}} is made by {{item.manufacturer | capitalize}}</span>
+                            <br>
+                            <a href="">{{ item.text | undercase | url}}</a><br>
+                            <button v-on:click="deleteItem(index)" class="btn btn-danger btn-sm">Delete</button>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+            <ul>
+                <li>Total Microphones: {{ totalMics }}</li>
+                <li>Variety: {{ totalModels }}</li>
+            </ul>
+        </template>
+
+        <p v-else>No mics in the locker!</p>
     </div>
+    <script
+            src="https://code.jquery.com/jquery-3.1.1.min.js"
+            integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+            crossorigin="anonymous"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <script type="text/javascript" src="js/index.js"></script>
 </body>
