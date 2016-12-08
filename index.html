@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:v-on="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <div id="card">
+        <header>{{ header }}</header>
+        <div>
+            <input id="addItem" v-on:keypress.enter/>
+            <input id="itemMake" v-on:keypress.enter/>
+            <button v-on:click="addItem">Add Mic</button>
+        </div>
+        <ul>
+            <li v-for="(item , index) in items">
+                <h4>{{ item.text | uppercase }}
+                    <button v-on:click="deleteItem(index)">Delete</button></h4>
+                <span>The {{item.text | undercase}} is made by {{item.manufacturer | capitalize}}</span>
+                <br>
+                <a href="">{{ item.text | undercase | url}}</a>
+            </li>
+        </ul>
+    </div>
+    <script src="https://unpkg.com/vue/dist/vue.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+</body>
+</html>
