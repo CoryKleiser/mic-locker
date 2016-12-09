@@ -13,9 +13,12 @@
 </head>
 <body>
     <div id="card">
+        <header>
+            <legend><h1 class="text-center text-info">{{ header }}</h1></legend>
+        </header>
         <div class="container-fluid">
-            <form class="form-inline" v-on:submit.prevent="addItem">
-                <!--TODO: add input labels-->
+            <form v-on:submit.prevent="addItem" v-if="addItemBool">
+                <h2 class="text-center">Add Mic</h2>
                 <div class="form-group">
                     <label for="addItem" class="sr-only">Microphone Model</label>
                     <input id="addItem" placeholder="Mic Model" required
@@ -33,20 +36,27 @@
                     <input id="itemQuantity" type="number" min="1" placeholder="Quantity" required
                            class="form-control"/>
                 </div>
+                <input id="cancelAddMicrophone" type="button" value="Cancel"
+                       v-on:click="addItemBool=false"
+                       class="btn btn-danger col-xs-offset-7 col-xs-2"/>
                 <input id="addMicrophone" type="submit" value="Add Mic"
-                    class="btn btn-default pull-right"/>
+                       class="btn btn-success col-xs-offset-1 col-xs-2"/>
             </form>
+            <input type="button" id="addItemBool" value="Add Mic"
+               v-if="!addItemBool" v-on:click="addItemBool = true"
+               class="btn btn-success pull-right" />
+            <br>
+            <br>
         </div>
 
         <template v-if="items.length > 0">
-                <header>{{ header }}</header>
-            <ul class="list-unstyled">
-                <div class="container">
+            <div class="container-fluid">
+                <ul class="list-unstyled">
                     <li v-for="(item , index) in items"
-                        class="panel panel-info">
+                        class="panel panel-primary">
                         <h4 class="panel-heading">{{ item.text | uppercase }}</h4>
                         <div class="panel-body">
-                            <h4 class="pull-right">
+                            <span class="pull-right">
                                 <input type="button" value="-" v-on:click="subtractMic(index)"
                                     v-show="item.quantity > 0"
                                     class="btn btn-warning btn-xs"/>
@@ -54,23 +64,32 @@
 
                                 <input type="button" value="+" v-on:click="addMic(index)"
                                     class="btn btn-warning btn-xs"/>
-                            </h4>
+                            </span>
                             <span>The {{item.text | undercase}} is made by {{item.manufacturer | capitalize}}</span>
                             <br>
                             <a href="">{{ item.text | undercase | url}}</a><br>
                             <button v-on:click="deleteItem(index)" class="btn btn-danger btn-sm">Delete</button>
                         </div>
-                    </div>
-                </li>
-            </ul>
-            <ul>
-                <li>Total Microphones: {{ totalMics }}</li>
-                <li>Variety: {{ totalModels }}</li>
+                    </li>
+                </ul>
+            </div>
+            <ul class="list-unstyled">
+                <div class="container-fluid">
+                    <li class="list-group-item list-group-item-info">
+                        <h2>Total Microphones: {{ totalMics }}</h2>
+                    </li>
+                    <li class="list-group-item list-group-item-info">
+                        <h2>Variety: {{ totalModels }}</h2>
+                    </li>
+                </div>
             </ul>
         </template>
 
         <p v-else>No mics in the locker!</p>
     </div>
+    <script>
+
+    </script>
     <script
             src="https://code.jquery.com/jquery-3.1.1.min.js"
             integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="

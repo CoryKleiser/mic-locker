@@ -3,12 +3,13 @@
 var card = new Vue({
     el: "#card",
     data: {
-        header: "Microphones",
+        header: "Mic Locker",
+        addItemBool: false,
         totalMics: 0,
         totalModels: 0,
         items: [
             {
-                text: "akg414",
+                text: "c414",
                 manufacturer: "AKG",
                 quantity: 1
             },
@@ -39,6 +40,7 @@ var card = new Vue({
                 itemInput.value = "";
                 manufacturerInput.value = "";
                 itemQuantity.value = "";
+                this.addItemBool = false;
             }
         },
         deleteItem: function(index){
