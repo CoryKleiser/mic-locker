@@ -1,4 +1,19 @@
 'use strict';
+var db = new PouchDB('inventory_database');
+var remoteCouch = false;
+// var currentItems = getAllItems();
+
+//TODO:: fix pouchdb issues
+function getAllItems(){
+    db.allDocs({include_docs: true, descending: true})
+        .then(function (doc) {
+            return doc.rows;
+        })
+        .catch(function (err) {
+            console.log(err);
+            console.log(`Unable to retrieve data`)
+        });
+}
 
 var card = new Vue({
     el: "#card",
@@ -9,39 +24,59 @@ var card = new Vue({
         totalModels: 0,
         items: [
             {
-                text: "c414",
-                manufacturer: "AKG",
+                text: 'c414',
+                manufacturer: 'AKG',
                 quantity: 1
             },
             {
-                text: "U87",
-                manufacturer: "Neumann",
+                text: 'u87',
+                manufacturer: 'neumann',
                 quantity: 2
             },
             {
-                text: "sm58",
-                manufacturer: "sennheiser",
-                quantity: 6
+                text: 'sm57',
+                manufacturer: 'neumann',
+                quantity: 5
             }
         ]
     },
     methods: {
         addItem: function(){
-            let itemInput = document.getElementById("addItem");
-            let manufacturerInput = document.getElementById("itemMake");
-            let itemQuantity = document.getElementById("itemQuantity");
+            var itemInput = document.getElementById("addItem");
+            var manufacturerInput = document.getElementById("itemMake");
+            var itemQuantity = document.getElementById("itemQuantity");
 
-            if (itemInput.value !== ""){
-                this.items.push({
+            if (itemInput. value !== ""){
+                var newItem = {
+                    _id: itemInput.value,
                     text: itemInput.value,
                     manufacturer: manufacturerInput.value,
                     quantity: parseInt(itemQuantity.value)
-                });
+                };
+                this.items.push(newItem);
+                db.put(newItem)
+                    .then(function(result){
+                    console.log(result);
+                    console.log(`Successfully posted new item to db!`)})
+                    .catch(function(err){
+                        console.log(err);
+                        console.log(`Whoops! There's an error`)
+                    });
                 itemInput.value = "";
                 manufacturerInput.value = "";
                 itemQuantity.value = "";
                 this.addItemBool = false;
             }
+        },
+        showAllItems: function(){
+            db.allDocs({include_docs: true, descending: true})
+                .then(function (doc){
+                    return doc.rows;
+                })
+                .catch(function (err) {
+                    console.log(err);
+                    console.log(`Unable to retrieve data`)
+                });
         },
         deleteItem: function(index){
             this.items.splice(index, 1);
@@ -56,6 +91,11 @@ var card = new Vue({
         }
     },
     computed: {
+        // items: function() {
+        //     var updateItems = getAllItems();
+        //     console.log(updateItems);
+        //     return updateItems
+        // },
         totalMics: function () {
             var sum = 0;
             var items = this.items;
