@@ -14,6 +14,7 @@
 <body>
     <div id="card">
         <header>
+
             <legend><h1 class="text-center text-info">{{ header }}</h1></legend>
         </header>
         <div class="container-fluid">
@@ -53,22 +54,24 @@
             <div class="container-fluid">
                 <ul class="list-unstyled">
                     <li v-for="(item , index) in items"
-                        class="panel panel-primary">
-                        <h4 class="panel-heading">{{ item.text | uppercase }}</h4>
-                        <div class="panel-body">
+                        class="col-sm-6 col-md-4 col-lg-3">
+                        <div class="panel panel-primary">
+                            <h4 class="panel-heading">{{ item.text | uppercase }}</h4>
+                            <div class="panel-body">
                             <span class="pull-right">
                                 <input type="button" value="-" v-on:click="subtractMic(index)"
-                                    v-show="item.quantity > 0"
-                                    class="btn btn-warning btn-xs"/>
+                                       v-show="item.quantity > 0"
+                                       class="btn btn-warning btn-xs"/>
                                 <span class="badge">{{ item.quantity }}</span>
 
                                 <input type="button" value="+" v-on:click="addMic(index)"
-                                    class="btn btn-warning btn-xs"/>
+                                       class="btn btn-warning btn-xs"/>
                             </span>
-                            <span>The {{item.text | undercase}} is made by {{item.manufacturer | capitalize}}</span>
-                            <br>
-                            <a href="">{{ item.text | undercase | url}}</a><br>
-                            <button v-on:click="deleteItem(index)" class="btn btn-danger btn-sm">Delete</button>
+                                <span>The {{item.text | lowercase}} is made by {{item.manufacturer | capitalize}}</span>
+                                <br>
+                                <a href="">{{ item.text | lowercase | url}}</a><br>
+                                <button v-on:click="deleteItem(index)" class="btn btn-danger btn-sm">Delete</button>
+                            </div>
                         </div>
                     </li>
                 </ul>

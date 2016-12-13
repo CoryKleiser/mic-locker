@@ -91,11 +91,6 @@ var card = new Vue({
         }
     },
     computed: {
-        // items: function() {
-        //     var updateItems = getAllItems();
-        //     console.log(updateItems);
-        //     return updateItems
-        // },
         totalMics: function () {
             var sum = 0;
             var items = this.items;
@@ -124,7 +119,7 @@ var card = new Vue({
             value = value.toString();
             return value.toUpperCase();
         },
-        undercase: function (value){
+        lowercase: function (value){
             if(!value) return '';
             value = value.toString();
             return value.toLowerCase();
