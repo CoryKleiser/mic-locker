@@ -78,6 +78,9 @@ var card = new Vue({
                     console.log(`Unable to retrieve data`)
                 });
         },
+        editItem: function (index) {
+            //TODO: edit item function
+        },
         deleteItem: function(index){
             this.items.splice(index, 1);
         },

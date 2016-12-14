@@ -54,23 +54,30 @@
             <div class="container-fluid">
                 <ul class="list-unstyled">
                     <li v-for="(item , index) in items"
-                        class="col-sm-6 col-md-4 col-lg-3">
+                        class="col-sm-6 col-md-4">
                         <div class="panel panel-primary">
                             <h4 class="panel-heading">{{ item.text | uppercase }}</h4>
                             <div class="panel-body">
                             <span class="pull-right">
-                                <input type="button" value="-" v-on:click="subtractMic(index)"
+                                <button v-on:click="subtractMic(index)"
                                        v-show="item.quantity > 0"
-                                       class="btn btn-warning btn-xs"/>
+                                        class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-chevron-down"></span></button>
                                 <span class="badge">{{ item.quantity }}</span>
 
-                                <input type="button" value="+" v-on:click="addMic(index)"
-                                       class="btn btn-warning btn-xs"/>
+                                <button v-on:click="addMic(index)"
+                                        class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-chevron-up"></span></button>
                             </span>
                                 <span>The {{item.text | lowercase}} is made by {{item.manufacturer | capitalize}}</span>
                                 <br>
                                 <a href="">{{ item.text | lowercase | url}}</a><br>
-                                <button v-on:click="deleteItem(index)" class="btn btn-danger btn-sm">Delete</button>
+                                <button v-on:click="deleteItem(index)"
+                                        class="btn btn-danger btn-sm">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </button>
+                                <button v-on:click="editItem(index)"
+                                        class="btn btn-info btn-sm">
+                                    <span class="glyphicon glyphicon-pencil"></span>
+                                </button>
                             </div>
                         </div>
                     </li>
