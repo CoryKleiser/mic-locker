@@ -1,0 +1,20 @@
+{
+  "name": "MicLocker",
+  "version": "0.0.1",
+  "description": "simple inventory application for your mic locker",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/CoryKleiser/mic-locker.git"
+  },
+  "author": "Cory Kleiser",
+  "devDependencies": {
+    "gulp": "^3.8.11",
+    "gulp-jshint": "^1.9.0",
+    "gulp-ruby-sass": "^1.0.5",
+    "gulp-sourcemaps": "^1.5.2",
+    "gulp-webserver": "^0.9.1"
+  },
+  "dependencies": {
+    "pouchdb": "^6.0.7"
+  }
+}

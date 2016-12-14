@@ -1,5 +1,5 @@
 'use strict';
-var db = new PouchDB('inventory_database');
+// var db = new PouchDB('inventory_database');
 var remoteCouch = false;
 // var currentItems = getAllItems();
 
