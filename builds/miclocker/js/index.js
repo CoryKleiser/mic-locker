@@ -20,6 +20,7 @@ var card = new Vue({
     data: {
         header: "Mic Locker",
         addItemBool: false,
+        itemEditBool: false,
         totalMics: 0,
         totalModels: 0,
         items: [
@@ -80,6 +81,7 @@ var card = new Vue({
         },
         editItem: function (index) {
             //TODO: edit item function
+            this.itemEditBool = true;
         },
         deleteItem: function(index){
             this.items.splice(index, 1);
