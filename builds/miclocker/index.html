@@ -98,7 +98,26 @@
         <p v-else>No mics in the locker!</p>
 
         <div v-if="itemEditBool == true"
-                class="edit">
+                class="edit container-fluid">
+            <form v-on:submit.prevent="updateItem">
+                <h2 class="text-center">Edit {{items[currentIndex].text | uppercase}}</h2>
+                <div class="form-group">
+                    <label for="editItem" class="sr-only">Microphone Model</label>
+                    <input id="editItem" v-model="items[currentIndex].text" placeholder="Mic Model"
+                           class="form-control"/>
+                </div>
+
+                <div class="form-group">
+                    <label for="editMake" class="sr-only">Microphone Manufacturer</label>
+                    <input id="editMake" v-model="items[currentIndex].manufacturer" placeholder="Manufacturer"
+                           class="form-control"/>
+                </div>
+                <input id="cancelEditMicrophone" type="button" value="Cancel"
+                       v-on:click="itemEditBool=false"
+                       class="btn btn-sm btn-danger col-xs-offset-7 col-xs-2"/>
+                <input id="editMicrophone" type="submit" value="Update"
+                       class="btn btn-sm btn-success col-xs-offset-1 col-xs-2"/>
+            </form>
 
         </div>
     </div>

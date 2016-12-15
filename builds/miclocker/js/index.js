@@ -21,6 +21,7 @@ var card = new Vue({
         header: "Mic Locker",
         addItemBool: false,
         itemEditBool: false,
+        currentIndex: null,
         totalMics: 0,
         totalModels: 0,
         items: [
@@ -36,7 +37,7 @@ var card = new Vue({
             },
             {
                 text: 'sm57',
-                manufacturer: 'neumann',
+                manufacturer: 'sennheiser',
                 quantity: 5
             }
         ]
@@ -80,8 +81,12 @@ var card = new Vue({
                 });
         },
         editItem: function (index) {
-            //TODO: edit item function
             this.itemEditBool = true;
+            this.currentIndex = index;
+        },
+        updateItem: function () {
+            //TODO:::::Persist Update With PouchDB
+            this.itemEditBool = false;
         },
         deleteItem: function(index){
             this.items.splice(index, 1);
