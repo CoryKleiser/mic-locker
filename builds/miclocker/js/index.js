@@ -22,6 +22,7 @@ var card = new Vue({
         addItemBool: false,
         itemEditBool: false,
         currentIndex: null,
+        editableValues: {},
         totalMics: 0,
         totalModels: 0,
         items: [
@@ -82,11 +83,17 @@ var card = new Vue({
         },
         editItem: function (index) {
             this.itemEditBool = true;
+            this.editableValues.text = this.items[index].text;
+            this.editableValues.manufacturer = this.items[index].manufacturer;
+            this.editableValues.quantity = this.items[index].quantity;
             this.currentIndex = index;
         },
         updateItem: function () {
             //TODO:::::Persist Update With PouchDB
+            this.items[this.currentIndex] = this.editableValues;
             this.itemEditBool = false;
+            this.currentIndex = null;
+            this.editableValues = {};
         },
         deleteItem: function(index){
             this.items.splice(index, 1);

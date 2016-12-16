@@ -61,11 +61,14 @@
                             <span class="pull-right">
                                 <button v-on:click="subtractMic(index)"
                                        v-show="item.quantity > 0"
-                                        class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-chevron-down"></span></button>
+                                        class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-chevron-down"></span>
+                                </button>
+
                                 <span class="badge">{{ item.quantity }}</span>
 
                                 <button v-on:click="addMic(index)"
-                                        class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-chevron-up"></span></button>
+                                        class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-chevron-up"></span>
+                                </button>
                             </span>
                                 <span>The {{item.text | lowercase}} is made by {{item.manufacturer | capitalize}}</span>
                                 <br>
@@ -103,15 +106,22 @@
                 <h2 class="text-center">Edit {{items[currentIndex].text | uppercase}}</h2>
                 <div class="form-group">
                     <label for="editItem" class="sr-only">Microphone Model</label>
-                    <input id="editItem" v-model="items[currentIndex].text" placeholder="Mic Model"
+                    <input id="editItem" v-model="editableValues.text" placeholder="Mic Model"
                            class="form-control"/>
                 </div>
 
                 <div class="form-group">
                     <label for="editMake" class="sr-only">Microphone Manufacturer</label>
-                    <input id="editMake" v-model="items[currentIndex].manufacturer" placeholder="Manufacturer"
+                    <input id="editMake" v-model="editableValues.manufacturer" placeholder="Manufacturer"
                            class="form-control"/>
                 </div>
+
+                <div class="form-group">
+                    <label for="editQuantity" class="sr-only">Quantity</label>
+                    <input id="editQuantity" v-model="editableValues.quantity" type="number" min="1" placeholder="Quantity" required
+                           class="form-control"/>
+                </div>
+
                 <input id="cancelEditMicrophone" type="button" value="Cancel"
                        v-on:click="itemEditBool=false"
                        class="btn btn-sm btn-danger col-xs-offset-7 col-xs-2"/>
