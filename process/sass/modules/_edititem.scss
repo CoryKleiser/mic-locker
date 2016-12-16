@@ -1,8 +1,14 @@
 .edit{
   position: absolute;
-  background-color: grey;
+  background-color: hsla(0, 0, 10%, 0.9);
+  border-radius: 10px;
+  padding: 30px;
   width: 80vw;
-  height: 60vh;
   top: 20vh;
   left: 10vw;
+  h2{
+    padding:0 0 15px 0;
+    color: $color-secondary;
+    font-weight: bold;
+  }
 }
