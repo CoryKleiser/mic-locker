@@ -90,10 +90,10 @@ var card = new Vue({
         },
         updateItem: function () {
             //TODO:::::Persist Update With PouchDB
-            this.items[this.currentIndex] = this.editableValues;
-            this.itemEditBool = false;
-            this.currentIndex = null;
-            this.editableValues = {};
+                this.items[this.currentIndex] = this.editableValues;
+                this.itemEditBool = false;
+                this.currentIndex = null;
+                this.editableValues = {};
         },
         deleteItem: function(index){
             this.items.splice(index, 1);
